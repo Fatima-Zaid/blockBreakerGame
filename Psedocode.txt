@@ -1,0 +1,50 @@
+select gameContainerWidth
+select gameContainerHeight
+select blocks
+select paddle
+select ball
+select button
+
+const setUpGame =()=>{
+  set score to zero
+  start from level 1
+
+  generate blocks on the screen
+
+  set the paddle position and the ball on the center of the screen (start position)
+}
+
+const moveBall =()=>{
+  set ball in start position at x and y
+  set speed for the ball
+
+  change (position x + speed) and (position y + speed) >> make ball moves that much in x and y axis within the width and height of gameContainerHeight
+
+  check if ball falling outside of game container at the bottom lower than game paddle then stop game and player loose
+
+  check if ball hit blocks at their (x,y)  positions, if yes let block disappear (removed)
+
+}
+
+
+const checkForWin = ()=>{
+ check the number of blocks left on the screen, if they all disappear (no. of blocks == 0) let player win
+}
+
+const movePaddle = () =>{
+  paddle start at initial position x,y
+
+  let paddle move by using the keyboard left and right arrow
+}
+
+const check score = () =>{
+  every time ball hits block increase score
+}
+
+
+const reseatGame(){
+  generate all the blocks again in the container
+  set ball and paddle at the initial position at the center
+}
+
+
