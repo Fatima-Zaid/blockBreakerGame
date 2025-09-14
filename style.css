@@ -1,3 +1,64 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100wh;
+  height: 100vh;
+}
+
+.gameContainer {
+  position: relative;
+  width: 1200px;
+  height: 650px;
+  background-color: beige;
+  display: flex;
+  justify-content: center;
+}
+
+.ball {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+
+  background-color: crimson;
+  border-radius: 50%;
+}
+
+.paddleContainer {
+  display: flex;
+  align-items: last baseline;
+}
+
+.paddle {
+  position: absolute;
+  width: 250px;
+  height: 20px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+
+  background-color: crimson;
+}
+
+.blocksContainer {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 15px;
+  margin: 50px;
+}
+
+.block {
+  background-color: red;
+  width: 120px;
+  height: 35px;
+  border-radius: 15px;
 }
