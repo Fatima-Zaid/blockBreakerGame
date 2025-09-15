@@ -35,9 +35,9 @@ const createBlocks = () => {
     for (let j = 0; j < cols; j++) {
       let block = document.createElement("div")
       block.classList.add("block")
-      block.id = id
-      id++
+      block.setAttribute("id", `${i}-${j}`)
       gameContainer.appendChild(block)
+
       blocks[i][j] = block
     }
   }
@@ -46,7 +46,7 @@ createBlocks()
 
 document.addEventListener("keydown", (event) => {
   let key = event.key
-  console.log(key)
+  //console.log(key)
   if (key == "ArrowLeft") {
     //toward -x axis so decrease position
     if (xPaddlePosition > 0) {
@@ -115,7 +115,7 @@ const hitBlocks = () => {
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       let block = blocks[i][j]
-      console.log("block", block)
+      //console.log("block", block)
       if (block.style.display !== "none") {
         if (
           xBallPosition < block.offsetLeft + block.clientWidth &&
@@ -123,7 +123,8 @@ const hitBlocks = () => {
           yBallPosition < block.offsetTop + block.clientHeight &&
           yBallPosition + ball.clientHeight > block.offsetTop
         ) {
-          const blockToRemove = document.getElementById(block.id)
+          const blockToRemove = document.getElementById(`${i}-${j}`)
+          console.log("Removed Block " + blockToRemove.id)
           if (blockToRemove) blockToRemove.remove()
           yAddBall = -yAddBall
           return
