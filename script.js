@@ -1,6 +1,8 @@
 let gameContainer = document.querySelector(".gameContainer")
 let ball = document.querySelector(".ball")
 let paddle = document.querySelector(".paddle")
+let lives = document.querySelector(".lives")
+let score = document.querySelector(".score")
 
 //set initial positions for ball
 let xBallPosition = gameContainer.clientWidth / 2 - ball.clientWidth / 2
@@ -18,9 +20,39 @@ let addPaddle = 20
 
 paddle.style.bottom = "10px"
 
+let scoreNum = 0
+
 let blocks = []
 let cols = 7
 let rows = 4
+
+let initialScore = 0
+let blockRemoved = false
+
+score.innerText = "Score:" + initialScore
+
+let noLives = 3
+lives.innerText = "Lives:" + noLives
+
+const countLives = (num) => {
+  //if ball hit the ground then stop the game
+  //this source shows how we can stop game, url: https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Game_over
+
+  lives.innerText = "Lives:" + num
+
+  if (num == 0) {
+    alert("GAME OVER") //alert msg
+    document.location.reload() //this will reload the page after clicking ok to start again
+    clearInterval(interval) //reset interval of the game loop
+  }
+}
+
+const countScore = (block) => {
+  if (blockRemoved) {
+    scoreNum += 10
+    score.innerText = "Score:" + scoreNum
+  }
+}
 
 for (let i = 0; i < rows; i++) {
   blocks[i] = []
@@ -72,10 +104,13 @@ const moveBall = () => {
     xAddBall = xAddBall * -1
   }
 
-  if (
-    yBallPosition + ball.clientHeight >= gameContainer.clientHeight ||
-    yBallPosition <= 0
-  ) {
+  if (yBallPosition + ball.clientHeight >= gameContainer.clientHeight) {
+    noLives -= 1
+    countLives(noLives)
+    yAddBall = yAddBall * -1
+  }
+
+  if (yBallPosition <= 0) {
     yAddBall = yAddBall * -1
   }
 
@@ -125,19 +160,27 @@ const hitBlocks = () => {
         ) {
           const blockToRemove = document.getElementById(`${i}-${j}`)
           console.log("Removed Block " + blockToRemove.id)
-          if (blockToRemove) blockToRemove.remove()
+          if (blockToRemove) {
+            blockToRemove.remove()
+            blockRemoved = true
+            countScore(blockRemoved)
+          }
+          blockRemoved = false
           yAddBall = -yAddBall
           return
         }
       }
     }
   }
+  return true
 }
 
 const loadGame = () => {
   movePaddle()
   moveBall()
   hitBlocks()
+  countScore()
+
   requestAnimationFrame(loadGame)
 }
 requestAnimationFrame(loadGame)

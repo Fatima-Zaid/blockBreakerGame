@@ -42,7 +42,7 @@ body {
 
 .paddle {
   position: absolute;
-  width: 150px;
+  width: 200px;
   height: 15px;
   background-color: #4dff4d;
   border-radius: 5px;
