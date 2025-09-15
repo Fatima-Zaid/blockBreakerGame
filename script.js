@@ -1,123 +1,142 @@
 let gameContainer = document.querySelector(".gameContainer")
 let ball = document.querySelector(".ball")
 let paddle = document.querySelector(".paddle")
-let fbs = 60
 
+//set initial positions for ball
+let xBallPosition = gameContainer.clientWidth / 2 - ball.clientWidth / 2
+let yBallPosition = gameContainer.clientHeight / 2 - ball.clientHeight / 2
+
+//set values for movement of ball in x and y axis
+let xAddBall = 5
+let yAddBall = 3
+
+//set initial positions of paddle
+let xPaddlePosition = gameContainer.clientWidth / 2 - paddle.clientWidth / 2
+paddle.style.left = xPaddlePosition + "px"
+
+let addPaddle = 20
+
+paddle.style.bottom = "10px"
+
+let blocks = []
 let cols = 7
 let rows = 4
 
-let blocksContainer = document.querySelector(".blocksContainer")
-
-for (let i = 0; i < 28; i++) {
-  let newBlock = document.createElement("div")
-  newBlock.classList.add("block")
-  blocksContainer.appendChild(newBlock)
+for (let i = 0; i < rows; i++) {
+  blocks[i] = []
+  for (let j = 0; j < cols; j++) {
+    blocks[i][j] = null
+  }
 }
 
-let block = document.querySelectorAll(".block")
+const createBlocks = () => {
+  let id = 0
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      let block = document.createElement("div")
+      block.classList.add("block")
+      block.id = id
+      id++
+      gameContainer.appendChild(block)
+      blocks[i][j] = block
+    }
+  }
+}
+createBlocks()
 
-//let paddleCoordinates = paddle.getBoundingClientRect()
-//console.log(paddle.offsetTop)
-//console.log(paddleCoordinates)
+document.addEventListener("keydown", (event) => {
+  let key = event.key
+  console.log(key)
+  if (key == "ArrowLeft") {
+    //toward -x axis so decrease position
+    if (xPaddlePosition > 0) {
+      xPaddlePosition -= addPaddle
+      paddle.style.left = xPaddlePosition + "px"
+    }
+  }
 
-//let position = gameContainer.getBoundingClientRect()
-//console.log(position)
-//
-
-//set initial positions for ball
-let xPosition = gameContainer.clientWidth / 2
-let yPosition = gameContainer.clientHeight / 2
-
-let xAdd = 4
-let yAdd = 4
-
-//set initial positions of paddle
-let paddlePosition = gameContainer.clientWidth / 2 - paddle.clientWidth / 2
-let addPaddle = 0.2
+  if (key == "ArrowRight") {
+    //toward +x axis so increase position
+    if (xPaddlePosition < gameContainer.clientWidth - paddle.clientWidth) {
+      xPaddlePosition += addPaddle
+      paddle.style.left = xPaddlePosition + "px"
+    }
+  }
+})
 
 const moveBall = () => {
-  ball.style.left = xPosition + "px"
-  ball.style.top = yPosition + "px"
+  if (
+    xBallPosition + ball.clientWidth >= gameContainer.clientWidth ||
+    xBallPosition <= 0
+  ) {
+    xAddBall = xAddBall * -1
+  }
+
+  if (
+    yBallPosition + ball.clientHeight >= gameContainer.clientHeight ||
+    yBallPosition <= 0
+  ) {
+    yAddBall = yAddBall * -1
+  }
+
+  xBallPosition += xAddBall
+  yBallPosition += yAddBall
+
+  ball.style.left = xBallPosition + "px"
+  ball.style.top = yBallPosition + "px"
 }
 
 const movePaddle = () => {
-  paddle.style.left = paddlePosition + "px"
+  // Paddle collision
+  let ballCenter = xBallPosition + ball.clientWidth / 2
 
-  document.addEventListener("keydown", (event) => {
-    let key = event.key
-    console.log(key)
-    if (key == "ArrowLeft") {
-      //toward -x axis so decrease position
-      if (paddlePosition > 0) {
-        paddlePosition -= addPaddle
-        paddle.style.left = paddlePosition + "px"
-      }
-    }
+  if (
+    yBallPosition + ball.clientHeight >= paddle.offsetTop &&
+    ballCenter >= paddle.offsetLeft &&
+    ballCenter <= paddle.offsetLeft + paddle.clientWidth
+  ) {
+    // calculate bounce angle
+    let hitPoint = ballCenter - paddle.offsetLeft
+    let hitRatio = hitPoint / paddle.clientWidth
 
-    if (key == "ArrowRight") {
-      //toward +x axis so increase position
-      if (paddlePosition < gameContainer.clientWidth - paddle.clientWidth) {
-        paddlePosition += addPaddle
-        paddle.style.right = paddlePosition + "px"
-      }
-    }
-  })
-}
-console.log(yPosition)
-console.log(xPosition)
+    let maxAngle = Math.PI / 3 // 60 degrees
+    let angle = (hitRatio - 0.5) * 2 * maxAngle
 
-const hitBlock = () => {
-  for (let i = 0; i < block.length; i++) {
-    if (
-      block[i] &&
-      yPosition <= block[i].offsetTop + block[i].clientHeight &&
-      xPosition + ball.clientWidth >= block[i].offsetLeft &&
-      xPosition + ball.clientWidth <= block[i].offsetLeft + block[i].clientWidth
-    ) {
-      //console.log(block[i].offsetTop)
-      //console.log(block[i])
-      //console.log(block)
-      block[i].remove()
-      block[i] = null
-      yAdd = -yAdd
-      yPosition = block[i].offsetTop + ball.clientHeight
-      break
-    }
+    let speed = Math.sqrt(xAddBall * xAddBall + yAddBall * yAddBall)
+    xAddBall = speed * Math.sin(angle)
+    yAddBall = -Math.abs(speed * Math.cos(angle))
+
+    // prevent ball from going below paddle
+    yBallPosition = paddle.offsetTop - ball.clientHeight
   }
 }
 
-//the ball should move within time, i want the ball to change its position every x amount of time. so i will use setInterval() method. URL: https://www.w3schools.com/js/js_timing.asp
-//the method add 3px to the initial x and y position of the ball every 1 second = 1000 millisecond, and it keep calling the moveBall() function which will take the new positions and change them
-
-setInterval(() => {
-  if (
-    xPosition + ball.clientWidth >= gameContainer.clientWidth ||
-    xPosition <= 0
-  ) {
-    xAdd = xAdd * -1
+const hitBlocks = () => {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      let block = blocks[i][j]
+      console.log("block", block)
+      if (block.style.display !== "none") {
+        if (
+          xBallPosition < block.offsetLeft + block.clientWidth &&
+          xBallPosition + ball.clientWidth > block.offsetLeft &&
+          yBallPosition < block.offsetTop + block.clientHeight &&
+          yBallPosition + ball.clientHeight > block.offsetTop
+        ) {
+          const blockToRemove = document.getElementById(block.id)
+          if (blockToRemove) blockToRemove.remove()
+          yAddBall = -yAddBall
+          return
+        }
+      }
+    }
   }
+}
 
-  if (
-    yPosition + ball.clientHeight >= gameContainer.clientHeight ||
-    yPosition <= 0
-  ) {
-    yAdd = yAdd * -1
-  }
-
-  xPosition += xAdd
-  yPosition += yAdd
-
-  //I used offsetTop instead on clientTop  because it  returns  top position (in pixels) relative to the parent gameContainer
-  if (
-    yPosition + ball.clientHeight >= paddle.offsetTop &&
-    xPosition + ball.clientWidth >= paddle.offsetLeft &&
-    xPosition + ball.clientWidth <= paddle.offsetLeft + paddle.clientWidth
-  ) {
-    yAdd = -yAdd //so when it will be used again, make sure this value reversed and make ball go up
-    //console.log((yPosition = paddle.offsetTop - ball.clientHeight))
-    //yPosition = paddle.offsetTop - ball.clientHeight //ensures ball will no go beneath paddle ever again and gives new position in y starting from above the paddle directly
-  }
-  moveBall()
+const loadGame = () => {
   movePaddle()
-  hitBlock()
-}, 1000 / fbs)
+  moveBall()
+  hitBlocks()
+  requestAnimationFrame(loadGame)
+}
+requestAnimationFrame(loadGame)

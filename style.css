@@ -1,64 +1,48 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
 }
 
 body {
-  background-color: pink;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  width: 100wh;
+  width: 100vw;
   height: 100vh;
+  background: #222;
 }
 
 .gameContainer {
+  padding: 10px;
   position: relative;
-  width: 1200px;
-  height: 650px;
-  background-color: beige;
-  display: flex;
-  justify-content: center;
+  width: 700px;
+  height: 500px;
+  background-color: #111;
+  border: 2px solid #fff;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* For blocks */
+  grid-auto-rows: 25px; /* Height for each block row */
+  gap: 5px;
 }
 
 .ball {
   position: absolute;
-  width: 50px;
-  height: 50px;
-
-  background-color: crimson;
+  width: 20px;
+  height: 20px;
+  background-color: #4d4dff;
   border-radius: 50%;
 }
 
-.paddleContainer {
-  display: flex;
-  align-items: last baseline;
+.block {
+  background-color: #ff4d4d;
+  border-radius: 4px;
+  grid-column: span 1;
 }
 
 .paddle {
   position: absolute;
-  width: 250px;
-  height: 20px;
-  border-radius: 30px;
-  margin-bottom: 10px;
-
-  background-color: crimson;
-}
-
-.blocksContainer {
-  position: absolute;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: 15px;
-  margin: 50px;
-}
-
-.block {
-  background-color: red;
-  width: 120px;
-  height: 35px;
-  border-radius: 15px;
+  width: 100px;
+  height: 15px;
+  background-color: #4dff4d;
+  border-radius: 5px;
 }
