@@ -4,12 +4,13 @@
 }
 
 body {
+  font-family: "Press Start 2P", system-ui;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: #222;
 }
 
 .gameContainer {
@@ -17,7 +18,7 @@ body {
   position: relative;
   width: 700px;
   height: 500px;
-  background-color: #111;
+  background-color: #1111117c;
   border: 2px solid #fff;
   display: grid;
   grid-template-columns: repeat(7, 1fr); /* For blocks */
@@ -41,8 +42,27 @@ body {
 
 .paddle {
   position: absolute;
-  width: 100px;
+  width: 150px;
   height: 15px;
   background-color: #4dff4d;
   border-radius: 5px;
+}
+
+.gameInfo {
+  color: whitesmoke;
+  text-shadow: 2px 2px black;
+  display: flex;
+  width: 700px;
+  justify-content: space-between;
+  font-size: 25px;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }

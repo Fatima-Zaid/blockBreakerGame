@@ -6,11 +6,36 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <video autoplay muted loop id="myVideo">
+      <source src="images/video.mp4" type="video/mp4" />
+    </video>
+
+    <div class="gameInfo">
+      <p class="level">Level</p>
+      <p class="score">Score</p>
+    </div>
+
     <div class="gameContainer">
       <div class="ball"></div>
       <div class="paddle"></div>
     </div>
   </body>
+  <script>
+    var video = document.getElementById("myVideo")
+    const myFunction = () => {
+      if (video.paused) {
+        video.play()
+      } else {
+        video.pause()
+      }
+    }
+  </script>
 </html>
