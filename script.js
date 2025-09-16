@@ -4,6 +4,8 @@ let paddle = document.querySelector(".paddle")
 let lives = document.querySelector(".lives")
 let score = document.querySelector(".score")
 
+let animationID
+
 //set initial positions for ball
 let xBallPosition = gameContainer.clientWidth / 2 - ball.clientWidth / 2
 let yBallPosition = gameContainer.clientHeight / 2 - ball.clientHeight / 2
@@ -25,6 +27,11 @@ let scoreNum = 0
 let blocks = []
 let cols = 7
 let rows = 4
+let blockWidth = 80
+let blockHeight = 30
+let gap = 20
+
+let noBlocks = 0
 
 let initialScore = 0
 let blockRemoved = false
@@ -34,16 +41,34 @@ score.innerText = "Score:" + initialScore
 let noLives = 3
 lives.innerText = "Lives:" + noLives
 
+const reloadGame = () => {
+  let tryAgain = document.querySelector(".tryAgain")
+
+  if (tryAgain) {
+    document.location.reload()
+    requestAnimationFrame(animationID)
+  }
+}
+
+const gameOver = () => {
+  let msgContainer = document.querySelector(".gameOver")
+  cancelAnimationFrame(animationID)
+
+  msgContainer.style.visibility = "visible"
+  gameContainer.style.visibility = "hidden"
+}
+
 const countLives = (num) => {
-  //if ball hit the ground then stop the game
+  //if ball hit the ground 3 times then stop the game
   //this source shows how we can stop game, url: https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Game_over
 
   lives.innerText = "Lives:" + num
 
   if (num == 0) {
-    alert("GAME OVER") //alert msg
-    document.location.reload() //this will reload the page after clicking ok to start again
-    clearInterval(interval) //reset interval of the game loop
+    gameOver()
+    //alert("GAME OVER") //alert msg
+    //document.location.reload() //this will reload the page after clicking ok to start again
+    //clearInterval(interval) //reset interval of the game loop
   }
 }
 
@@ -51,6 +76,14 @@ const countScore = (block) => {
   if (blockRemoved) {
     scoreNum += 10
     score.innerText = "Score:" + scoreNum
+  }
+}
+
+const countBlocks = (noBlocks) => {
+  if (noBlocks == 28) {
+    alert("You Won!!")
+    document.location.reload()
+    clearInterval(interval)
   }
 }
 
@@ -68,6 +101,10 @@ const createBlocks = () => {
       let block = document.createElement("div")
       block.classList.add("block")
       block.setAttribute("id", `${i}-${j}`)
+
+      block.style.left = (blockWidth + gap) * j + "px"
+      block.style.top = (blockHeight + gap) * i + "px"
+
       gameContainer.appendChild(block)
 
       blocks[i][j] = block
@@ -162,8 +199,10 @@ const hitBlocks = () => {
           console.log("Removed Block " + blockToRemove.id)
           if (blockToRemove) {
             blockToRemove.remove()
+            noBlocks += 1
             blockRemoved = true
             countScore(blockRemoved)
+            countBlocks(noBlocks)
           }
           blockRemoved = false
           yAddBall = -yAddBall
@@ -176,11 +215,11 @@ const hitBlocks = () => {
 }
 
 const loadGame = () => {
+  animationID = window.requestAnimationFrame(loadGame)
   movePaddle()
   moveBall()
   hitBlocks()
   countScore()
-
-  requestAnimationFrame(loadGame)
 }
-requestAnimationFrame(loadGame)
+
+loadGame()

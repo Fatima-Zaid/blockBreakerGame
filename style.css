@@ -20,10 +20,9 @@ body {
   height: 500px;
   background-color: #1111117c;
   border: 2px solid #fff;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); /* For blocks */
-  grid-auto-rows: 25px; /* Height for each block row */
-  gap: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ball {
@@ -35,9 +34,13 @@ body {
 }
 
 .block {
+  margin-top: 10px;
+  margin-left: 15px;
+  position: absolute;
+  width: 90px;
+  height: 25px;
   background-color: #ff4d4d;
   border-radius: 4px;
-  grid-column: span 1;
 }
 
 .paddle {
@@ -65,4 +68,48 @@ body {
   min-height: 100%;
   object-fit: cover;
   z-index: -1;
+}
+
+.gameOver {
+  position: absolute;
+  visibility: hidden;
+  width: 500px;
+  height: 400px;
+  background-color: #f0e9e97c;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  border-radius: 15px;
+  border: 2px solid black;
+  font-size: 14px;
+}
+
+.gameOver p {
+  color: whitesmoke;
+  text-shadow: 2px 2px black;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+button {
+  width: 150px;
+  height: 60px;
+  border-radius: 10px;
+
+  font-family: "Press Start 2P", system-ui;
+  color: whitesmoke;
+  text-shadow: 2px 2px black;
+  background-color: rgb(91, 2, 20);
+
+  padding: 5px;
+  margin: 40px;
+  text-align: center;
+  border-radius: 10px;
 }
