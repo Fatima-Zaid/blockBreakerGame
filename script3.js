@@ -38,7 +38,7 @@ let blockRemoved = false
 
 score.innerText = "Score:" + initialScore
 
-let noLives = 3
+let noLives = 5
 lives.innerText = "Lives:" + noLives
 
 const reloadGame = () => {
