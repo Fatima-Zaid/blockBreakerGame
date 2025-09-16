@@ -11,14 +11,14 @@ let xBallPosition = gameContainer.clientWidth / 2 - ball.clientWidth / 2
 let yBallPosition = gameContainer.clientHeight / 2 - ball.clientHeight / 2
 
 //set values for movement of ball in x and y axis
-let xAddBall = 5
-let yAddBall = 3
+let xAddBall = 6
+let yAddBall = 4
 
 //set initial positions of paddle
 let xPaddlePosition = gameContainer.clientWidth / 2 - paddle.clientWidth / 2
 paddle.style.left = xPaddlePosition + "px"
 
-let addPaddle = 20
+let addPaddle = 22
 
 paddle.style.bottom = "10px"
 
@@ -26,9 +26,9 @@ let scoreNum = 0
 
 let blocks = []
 let cols = 7
-let rows = 4
+let rows = 8
 let blockWidth = 80
-let blockHeight = 30
+let blockHeight = 10
 let gap = 20
 
 let noBlocks = 0
@@ -51,7 +51,6 @@ const reloadGame = () => {
 }
 
 const gameOver = () => {
-  window.localStorage.clear()
   let msgContainer = document.querySelector(".gameOver")
   cancelAnimationFrame(animationID)
 
@@ -90,7 +89,7 @@ const countScore = (block) => {
 }
 
 const countBlocks = (noBlocks) => {
-  if (noBlocks == 4) {
+  if (noBlocks == rows * cols) {
     winGame()
   }
 }

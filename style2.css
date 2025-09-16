@@ -16,8 +16,8 @@ body {
 .gameContainer {
   padding: 10px;
   position: relative;
-  width: 900px;
-  height: 600px;
+  width: 700px;
+  height: 500px;
   background-color: #1111117c;
   border: 2px solid #fff;
   display: flex;
@@ -45,7 +45,7 @@ body {
 
 .paddle {
   position: absolute;
-  width: 220px;
+  width: 180px;
   height: 15px;
   background-color: #4dff4d;
   border-radius: 5px;

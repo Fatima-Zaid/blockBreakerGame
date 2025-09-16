@@ -24,14 +24,27 @@
     </div>
 
     <div class="gameContainer">
-      <div class="gameOver">
-        <h1>Game Over</h1>
-        <p>Do You Want to Play Again ?</p>
+      <div class="alertMsgs">
+        <div class="gameOver">
+          <h1>Game Over</h1>
+          <p>Do You Want to Play Again ?</p>
 
-        <div class="buttons">
-          <button class="tryAgain" onclick="reloadGame()">Try Again</button>
+          <div class="buttons">
+            <button class="tryAgain" onclick="reloadGame()">Try Again</button>
 
-          <a href="welcomePage.html"><button>Cancel</button></a>
+            <a href="welcomePage.html"><button>Cancel</button></a>
+          </div>
+        </div>
+
+        <div class="winGame">
+          <h1>You Won!</h1>
+          <p>Do You Want to Play Next Level ?</p>
+
+          <div class="buttons">
+            <a href="index2.html"><button>Next Level</button></a>
+
+            <a href="welcomePage.html"><button>Cancel</button></a>
+          </div>
         </div>
       </div>
 
