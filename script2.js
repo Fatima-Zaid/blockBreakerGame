@@ -1,6 +1,6 @@
 let gameContainer = document.querySelector(".gameContainer")
 let ball = document.querySelector(".ball")
-let paddle = document.querySelector(".paddle")
+let paddle = document.querySelector(".paddle2")
 let lives = document.querySelector(".lives")
 let score = document.querySelector(".score")
 
@@ -12,28 +12,28 @@ let yBallPosition = gameContainer.clientHeight / 2 - ball.clientHeight / 2
 
 //set values for movement of ball in x and y axis
 let xAddBall = 6
-let yAddBall = 4
+let yAddBall = 3
 
 //set initial positions of paddle
 let xPaddlePosition = gameContainer.clientWidth / 2 - paddle.clientWidth / 2
 paddle.style.left = xPaddlePosition + "px"
 
-let addPaddle = 22
+let addPaddle = 20
 
 paddle.style.bottom = "10px"
 
-let scoreNum = 0
-
 let blocks = []
 let cols = 7
-let rows = 8
+let rows = 2
 let blockWidth = 80
-let blockHeight = 10
+let blockHeight = 30
 let gap = 20
 
 let noBlocks = 0
 
-let initialScore = 0
+let initialScore = window.localStorage.getItem("score")
+let scoreNum = parseInt(initialScore)
+window.localStorage.setItem("score", scoreNum)
 let blockRemoved = false
 
 score.innerText = "Score:" + initialScore
@@ -51,6 +51,8 @@ const reloadGame = () => {
 }
 
 const gameOver = () => {
+  window.localStorage.setItem("score", initialScore)
+
   let msgContainer = document.querySelector(".gameOver")
   cancelAnimationFrame(animationID)
 
@@ -82,14 +84,16 @@ const countLives = (num) => {
 
 const countScore = (block) => {
   if (blockRemoved) {
-    window.localStorage.setItem("score", scoreNum)
+    console.log(typeof scoreNum)
     scoreNum += 10
+    window.localStorage.setItem("score", scoreNum)
+
     score.innerText = "Score:" + window.localStorage.getItem("score")
   }
 }
 
 const countBlocks = (noBlocks) => {
-  if (noBlocks == rows * cols) {
+  if (noBlocks == 4) {
     winGame()
   }
 }

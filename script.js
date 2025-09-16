@@ -22,11 +22,9 @@ let addPaddle = 20
 
 paddle.style.bottom = "10px"
 
-let scoreNum = 0
-
 let blocks = []
 let cols = 7
-let rows = 4
+let rows = 2
 let blockWidth = 80
 let blockHeight = 30
 let gap = 20
@@ -34,6 +32,8 @@ let gap = 20
 let noBlocks = 0
 
 let initialScore = 0
+let scoreNum = initialScore
+window.localStorage.setItem("score", scoreNum)
 let blockRemoved = false
 
 score.innerText = "Score:" + initialScore
@@ -51,7 +51,7 @@ const reloadGame = () => {
 }
 
 const gameOver = () => {
-  window.localStorage.clear()
+  window.localStorage.setItem("score", initialScore)
   let msgContainer = document.querySelector(".gameOver")
   cancelAnimationFrame(animationID)
 
@@ -83,8 +83,8 @@ const countLives = (num) => {
 
 const countScore = (block) => {
   if (blockRemoved) {
-    window.localStorage.setItem("score", scoreNum)
     scoreNum += 10
+    window.localStorage.setItem("score", scoreNum)
     score.innerText = "Score:" + window.localStorage.getItem("score")
   }
 }
