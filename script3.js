@@ -12,7 +12,7 @@ let yBallPosition = gameContainer.clientHeight / 2 - ball.clientHeight / 2
 
 //set values for movement of ball in x and y axis
 let xAddBall = 7
-let yAddBall = 4
+let yAddBall = 5
 
 //set initial positions of paddle
 let xPaddlePosition = gameContainer.clientWidth / 2 - paddle.clientWidth / 2

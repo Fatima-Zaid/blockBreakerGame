@@ -24,7 +24,7 @@ paddle.style.bottom = "10px"
 
 let blocks = []
 let cols = 7
-let rows = 2
+let rows = 1
 let blockWidth = 80
 let blockHeight = 30
 let gap = 20
