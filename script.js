@@ -90,7 +90,7 @@ const countScore = (block) => {
 }
 
 const countBlocks = (noBlocks) => {
-  if (noBlocks == 4) {
+  if (noBlocks == rows * cols) {
     winGame()
   }
 }

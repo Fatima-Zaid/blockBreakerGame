@@ -27,9 +27,9 @@ body {
 
 .ball {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: #4d4dff;
+  width: 30px;
+  height: 30px;
+  background-color: #fcf259;
   border-radius: 50%;
 }
 
@@ -39,14 +39,14 @@ body {
   position: absolute;
   width: 90px;
   height: 25px;
-  background-color: #ff4d4d;
+  background-color: #c5172e;
   border-radius: 4px;
 }
 
 .p {
   position: absolute;
   height: 15px;
-  background-color: #4dff4d;
+  background-color: #85193c;
   border-radius: 5px;
 }
 
