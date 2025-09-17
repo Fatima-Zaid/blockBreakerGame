@@ -1,6 +1,6 @@
 let gameContainer = document.querySelector(".gameContainer")
 let ball = document.querySelector(".ball")
-let paddle = document.querySelector(".paddle2")
+let paddle = document.querySelector(".paddle3")
 let lives = document.querySelector(".lives")
 let score = document.querySelector(".score")
 
@@ -11,34 +11,33 @@ let xBallPosition = gameContainer.clientWidth / 2 - ball.clientWidth / 2
 let yBallPosition = gameContainer.clientHeight / 2 - ball.clientHeight / 2
 
 //set values for movement of ball in x and y axis
-let xAddBall = 6
-let yAddBall = 3
+let xAddBall = 8
+let yAddBall = 8
 
 //set initial positions of paddle
 let xPaddlePosition = gameContainer.clientWidth / 2 - paddle.clientWidth / 2
 paddle.style.left = xPaddlePosition + "px"
 
-let addPaddle = 20
+let addPaddle = 30
 
 paddle.style.bottom = "10px"
 
 let blocks = []
 let cols = 7
-let rows = 2
+let rows = 5
 let blockWidth = 80
 let blockHeight = 30
 let gap = 20
 
 let noBlocks = 0
 
-let initialScore = window.localStorage.getItem("score")
-let scoreNum = parseInt(initialScore)
-window.localStorage.setItem("score", scoreNum)
+let initialScore = 0
+let scoreNum = initialScore
 let blockRemoved = false
 
 score.innerText = "Score:" + initialScore
 
-let noLives = 5
+let noLives = 10
 lives.innerText = "Lives:" + noLives
 
 const reloadGame = () => {

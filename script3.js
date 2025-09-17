@@ -18,7 +18,7 @@ let yAddBall = 3
 let xPaddlePosition = gameContainer.clientWidth / 2 - paddle.clientWidth / 2
 paddle.style.left = xPaddlePosition + "px"
 
-let addPaddle = 20
+let addPaddle = 22
 
 paddle.style.bottom = "10px"
 
@@ -46,7 +46,6 @@ const reloadGame = () => {
 
   if (tryAgain) {
     document.location.reload()
-    requestAnimationFrame(animationID)
   }
 }
 
@@ -98,16 +97,9 @@ const countBlocks = (noBlocks) => {
   }
 }
 
-for (let i = 0; i < rows; i++) {
-  blocks[i] = []
-  for (let j = 0; j < cols; j++) {
-    blocks[i][j] = null
-  }
-}
-
 const createBlocks = () => {
-  let id = 0
   for (let i = 0; i < rows; i++) {
+    blocks[i] = []
     for (let j = 0; j < cols; j++) {
       let block = document.createElement("div")
       block.classList.add("block")
@@ -222,7 +214,6 @@ const hitBlocks = () => {
       }
     }
   }
-  return true
 }
 
 const loadGame = () => {

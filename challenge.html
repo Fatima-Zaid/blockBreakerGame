@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="scriptChallenge.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <video autoplay muted loop id="myVideo">
+      <source src="videos/video.mp4" type="video/mp4" />
+    </video>
+
+    <h1>Challenge</h1>
+
+    <div class="gameInfo">
+      <p class="lives"></p>
+      <p class="score"></p>
+    </div>
+
+    <div class="gameContainer">
+      <div class="alertMsgs">
+        <div class="gameOver">
+          <h1>Game Over</h1>
+          <p>Do You Want to Play Again ?</p>
+
+          <div class="buttons">
+            <button class="tryAgain" onclick="reloadGame()">Try Again</button>
+
+            <a href="welcomePage.html"><button>Cancel</button></a>
+          </div>
+        </div>
+
+        <div class="winGame">
+          <h1>You Won!</h1>
+          <h1>You've Completed The Game</h1>
+          <div class="buttons">
+            <a href="welcomePage.html"><button>Back Home</button></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ball"></div>
+      <div class="p paddle3"></div>
+    </div>
+  </body>
+  <script>
+    var video = document.getElementById("myVideo")
+    const myFunction = () => {
+      if (video.paused) {
+        video.play()
+      }
+    }
+  </script>
+</html>
