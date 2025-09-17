@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
-    <script defer src="script3.js"></script>
+    <script defer src="script2.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,7 +18,7 @@
       <source src="media/video.mp4" type="video/mp4" />
     </video>
 
-    <h1>Level 3</h1>
+    <h1>Level 2</h1>
 
     <div class="gameInfo">
       <p class="lives"></p>
@@ -34,21 +34,24 @@
           <div class="buttons">
             <button class="tryAgain" onclick="reloadGame()">Try Again</button>
 
-            <a href="welcomePage.html"><button>Cancel</button></a>
+            <a href="index.html"><button>Cancel</button></a>
           </div>
         </div>
 
         <div class="winGame">
           <h1>You Won!</h1>
-          <h1>You've Completed The Game</h1>
+          <p>Do You Want to Play Next Level ?</p>
+
           <div class="buttons">
-            <a href="welcomePage.html"><button>Back Home</button></a>
+            <a href="level3.html"><button>Next Level</button></a>
+
+            <a href="index.html"><button>Cancel</button></a>
           </div>
         </div>
       </div>
 
       <div class="ball"></div>
-      <div class="p paddle3"></div>
+      <div class="p paddle2"></div>
     </div>
   </body>
   <script>
