@@ -14,7 +14,7 @@
   </head>
   <body>
     <video autoplay muted loop id="myVideo">
-      <source src="images/video.mp4" type="video/mp4" />
+      <source src="videos/video.mp4" type="video/mp4" />
     </video>
     <h1>Block Breaker</h1>
     <a href="index.html"><button>Start Game</button></a>
@@ -22,11 +22,9 @@
 
   <script>
     var video = document.getElementById("myVideo")
-    const myFunction = () => {
+    const loopVideo = () => {
       if (video.paused) {
         video.play()
-      } else {
-        video.pause()
       }
     }
   </script>

@@ -29,7 +29,7 @@ body {
   position: absolute;
   width: 30px;
   height: 30px;
-  background-color: #fcf259;
+  background-color: #f78d60;
   border-radius: 50%;
 }
 
@@ -39,14 +39,14 @@ body {
   position: absolute;
   width: 90px;
   height: 25px;
-  background-color: #c5172e;
+  background-color: #ea2264;
   border-radius: 4px;
 }
 
 .p {
   position: absolute;
   height: 15px;
-  background-color: #85193c;
+  background-color: #640d5f;
   border-radius: 5px;
 }
 
