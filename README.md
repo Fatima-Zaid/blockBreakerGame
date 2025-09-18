@@ -6,7 +6,7 @@
 
 ### [Github](https://github.com/Fatima-Zaid) |  [Linkedin](www.linkedin.com/in/fatima-zaid-3888b0319)
 
-![game](https://grubby-amaranth-kxu7mtpnwo.edgeone.app/Wireframe%20-%201.png)
+![game](media\Wireframe1.png)
 
 ***
 
