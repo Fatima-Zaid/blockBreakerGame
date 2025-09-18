@@ -28,10 +28,20 @@ First, I created a wireframe as a visual guide for the game's design. Then, I br
 
 ***
 
-### ***Screenshots***
+### ***Screenshots of Wireframe***
 
 ![game](media\Wireframe2.png)
 ![game](media\Wireframe3.png)
+***
+
+### ***Screenshots of Final Game***
+![game](media\finalGame1.png)
+![game](media\finalGame2.png)
+![game](media\finalGame3.png)
+***
+
+### ***Live Demo Link***
+[link](https://blockbreaker.surge.sh/)
 ***
 
 ### ***Future Updates***
@@ -42,7 +52,7 @@ First, I created a wireframe as a visual guide for the game's design. Then, I br
 
 
 
-### ***Credits***
+### ***Resiurces / Credits***
 
 Tutorials & Resources:
 
